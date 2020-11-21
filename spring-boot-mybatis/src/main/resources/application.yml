@@ -1,0 +1,49 @@
+server:
+  port: 8888
+  servlet:
+    context-path: /api
+# druid
+# 5要素
+# 监控的配置 filters 、 web-stat-filter 、stat-view-servlet
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      username: root
+      password: root
+      url: "jdbc:mysql://121.196.109.61:3306/boot?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false"
+      max-active: 10
+      #监控的配置
+      #'wall'用于防火墙,stat是统计
+      filters: wall,stat,slf4j
+      web-stat-filter:
+        #监控的路径
+        url-pattern: /*
+        #开启后台性能检测
+        enabled: true
+        #开始统计session的数据
+        session-stat-enable:
+        session-stat-max-count: 1000
+        #排除请求
+        exclusions: "*.js"
+      stat-view-servlet:
+        enabled: true
+        #禁止手动重置监控数据
+        reset-enable: false
+        login-username: admin
+        login-password: admin
+        url-pattern: /druid/*
+
+
+#mybat
+#注解mapper.xml文件
+#扫描Mapper接口
+#别名
+mybatis:
+  mapper-locations: classpath:/mapper/**/*.xml
+  type-aliases-package: com.smart.mybaits.entity
+
+
+
+
+
